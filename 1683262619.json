@@ -1087,7 +1087,7 @@
             ]
         },
         {
-            "description": "Mac OSX RDP: Quit Application -  Cmd+q to Alf+F4",
+            "description": "Mac OSX RDP: Quit Application - Cmd+q to Alt+F4",
             "manipulators": [
                 {
                     "type": "basic",
@@ -1117,11 +1117,53 @@
                                 "^com\\.microsoft\\.rdc\\.osx\\.beta$",
                                 "^com\\.thinomenon\\.RemoteDesktopConnection$",
                                 "^com\\.teamviewer\\.TeamViewer$",
-                                "^com\\.vmware\\.horizon$",
-				"^com\\.citrix\\.receiver\\.icaviewer\\.mac$"
+                                "^com\\.vmware\\.horizon$"
                             ]
                         }
                     ]
+                }
+            ]
+        },
+        {
+            "description": "Citrix: Quit Application - Cmd+q to Alt+F4 (as Cmd+Opt+F4)",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "q",
+                        "modifiers": {
+                            "mandatory": [
+                                "command"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "f4",
+                            "modifiers": [
+                                "command",
+                                "option"
+                            ]
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com\\.citrix\\.receiver\\.icaviewer\\.mac$"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "Mac OSX RDP: Browser open location - Cmd+l to Ctrl+L",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "l",
                 }
             ]
         },
