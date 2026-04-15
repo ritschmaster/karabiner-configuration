@@ -1,7 +1,7 @@
 {
     "title": "Mac OSX Style Shortcuts for RDP sessions. Translates OSX shortcuts to PC equivalent",
     "maintainers": [
-        "varp"
+        "ritschmaster"
     ],
     "rules": [
         {
@@ -382,6 +382,84 @@
                         {
                             "key_code": "right_arrow",
                             "modifiers": [
+                                "control"
+                            ]
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com\\.microsoft\\.rdc$",
+                                "^com\\.microsoft\\.rdc\\.mac$",
+                                "^com\\.microsoft\\.rdc\\.macos$",
+                                "^com\\.microsoft\\.rdc\\.osx\\.beta$",
+                                "^com\\.thinomenon\\.RemoteDesktopConnection$",
+                                "^com\\.teamviewer\\.TeamViewer$",
+                                "^com\\.vmware\\.horizon$",
+				"^com\\.citrix\\.receiver\\.icaviewer\\.mac$"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "Mac OSX RDP: Command+(Shift+)Left/Right to (Shift+)Home/End",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "left_arrow",
+                        "modifiers": {
+                            "mandatory": [
+                                "command"
+                            ],
+                            "optional": [
+                                "shift"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "home"
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com\\.microsoft\\.rdc$",
+                                "^com\\.microsoft\\.rdc\\.mac$",
+                                "^com\\.microsoft\\.rdc\\.macos$",
+                                "^com\\.microsoft\\.rdc\\.osx\\.beta$",
+                                "^com\\.thinomenon\\.RemoteDesktopConnection$",
+                                "^com\\.teamviewer\\.TeamViewer$",
+                                "^com\\.vmware\\.horizon$",
+				"^com\\.citrix\\.receiver\\.icaviewer\\.mac$"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "right_arrow",
+                        "modifiers": {
+                            "mandatory": [
+                                "command"
+                            ],
+                            "optional": [
+                                "shift"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "end"
+                        }
+                    ],
+                    "conditions": [
                                 "control"
                             ]
                         }
@@ -1274,6 +1352,110 @@
                 }
             ]
         },
+        {
+            "description": "Mac OSX RDP: Command+Shift+Up/Down to Ctrl+Shift+Home/End",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "parameters": {
+                        "basic.simultaneous_threshold_milliseconds": 500
+                    },
+                    "from": {
+                        "simultaneous": [
+                            {
+                                "key_code": "left_command"
+                            },
+                            {
+                                "key_code": "left_shift"
+                            },
+                            {
+                                "key_code": "up_arrow"
+                            }
+                        ]
+                    },
+                    "to": [
+                        {
+                            "key_code": "home",
+			    "modifiers": [
+				"control",
+                "shift"
+			    ]
+                        },
+                        {
+                            "set_variable": {
+                                "name": "win_used_in_combination_with", 
+                                "value": true
+                            }
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "bundle_identifiers": [
+                                "^com\\.microsoft\\.rdc$",
+                                "^com\\.microsoft\\.rdc\\.mac$",
+                                "^com\\.microsoft\\.rdc\\.macos$",
+                                "^com\\.microsoft\\.rdc\\.osx\\.beta$",
+                                "^com\\.thinomenon\\.RemoteDesktopConnection$",
+                                "^com\\.teamviewer\\.TeamViewer$",
+                                "^com\\.vmware\\.horizon$",
+				"^com\\.citrix\\.receiver\\.icaviewer\\.mac$"
+                            ],
+                            "type": "frontmost_application_if"
+                        }
+                    ]
+                },
+                {
+                    "type": "basic",
+                    "parameters": {
+                        "basic.simultaneous_threshold_milliseconds": 500
+                    },
+                    "from": {
+                        "simultaneous": [
+                            {
+                                "key_code": "left_command"
+                            },
+                            {
+                                "key_code": "left_shift"
+                            },
+                            {
+                                "key_code": "down_arrow"
+                            }
+                        ]
+                    },
+                    "to": [
+                        {
+                            "key_code": "end",
+			    "modifiers": [
+				"control",
+                "shift"
+			    ]
+                        },
+                        {
+                            "set_variable": {
+                                "name": "win_used_in_combination_with", 
+                                "value": true
+                            }
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com\\.microsoft\\.rdc$",
+                                "^com\\.microsoft\\.rdc\\.mac$",
+                                "^com\\.microsoft\\.rdc\\.macos$",
+                                "^com\\.microsoft\\.rdc\\.osx\\.beta$",
+                                "^com\\.thinomenon\\.RemoteDesktopConnection$",
+                                "^com\\.teamviewer\\.TeamViewer$",
+                                "^com\\.vmware\\.horizon$",
+				"^com\\.citrix\\.receiver\\.icaviewer\\.mac$"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        
 	{
             "description": "Mac OSX RDP: Swap ^ and <",
             "manipulators": [
@@ -1323,6 +1505,311 @@
             	       }
           	   ],
                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com\\.microsoft\\.rdc$",
+                                "^com\\.microsoft\\.rdc\\.mac$",
+                                "^com\\.microsoft\\.rdc\\.macos$",
+                                "^com\\.microsoft\\.rdc\\.osx\\.beta$",
+                                "^com\\.thinomenon\\.RemoteDesktopConnection$",
+                                "^com\\.teamviewer\\.TeamViewer$",
+                                "^com\\.vmware\\.horizon$"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "Mac OSX RDP: Option+L to Alt_GR+Q",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "l",
+                        "modifiers": {
+                            "mandatory": [
+                                "option"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "q",
+                            "modifiers": [
+                                "right_option"
+                            ]
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com\\.microsoft\\.rdc$",
+                                "^com\\.microsoft\\.rdc\\.mac$",
+                                "^com\\.microsoft\\.rdc\\.macos$",
+                                "^com\\.microsoft\\.rdc\\.osx\\.beta$",
+                                "^com\\.thinomenon\\.RemoteDesktopConnection$",
+                                "^com\\.teamviewer\\.TeamViewer$",
+                                "^com\\.vmware\\.horizon$"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "Mac OSX RDP: Option+7 to Alt_GR+<",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "7",
+                        "modifiers": {
+                            "mandatory": [
+                                "option"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "non_us_backslash",
+                            "modifiers": [
+                                "right_option"
+                            ]
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com\\.microsoft\\.rdc$",
+                                "^com\\.microsoft\\.rdc\\.mac$",
+                                "^com\\.microsoft\\.rdc\\.macos$",
+                                "^com\\.microsoft\\.rdc\\.osx\\.beta$",
+                                "^com\\.thinomenon\\.RemoteDesktopConnection$",
+                                "^com\\.teamviewer\\.TeamViewer$",
+                                "^com\\.vmware\\.horizon$"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "Mac OSX RDP: Option+Shift+7 to Alt_GR+?",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "7",
+                        "modifiers": {
+                            "mandatory": [
+                                "option",
+                                "shift"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "hyphen",
+                            "modifiers": [
+                                "right_option"
+                            ]
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com\\.microsoft\\.rdc$",
+                                "^com\\.microsoft\\.rdc\\.mac$",
+                                "^com\\.microsoft\\.rdc\\.macos$",
+                                "^com\\.microsoft\\.rdc\\.osx\\.beta$",
+                                "^com\\.thinomenon\\.RemoteDesktopConnection$",
+                                "^com\\.teamviewer\\.TeamViewer$",
+                                "^com\\.vmware\\.horizon$"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "Mac OSX RDP: Option+n to Alt_GR++",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "n",
+                        "modifiers": {
+                            "mandatory": [
+                                "option"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "close_bracket",
+                            "modifiers": [
+                                "right_option"
+                            ]
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com\\.microsoft\\.rdc$",
+                                "^com\\.microsoft\\.rdc\\.mac$",
+                                "^com\\.microsoft\\.rdc\\.macos$",
+                                "^com\\.microsoft\\.rdc\\.osx\\.beta$",
+                                "^com\\.thinomenon\\.RemoteDesktopConnection$",
+                                "^com\\.teamviewer\\.TeamViewer$",
+                                "^com\\.vmware\\.horizon$"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "Mac OSX RDP: Option+5 to Alt_GR+8",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "5",
+                        "modifiers": {
+                            "mandatory": [
+                                "option"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "8",
+                            "modifiers": [
+                                "right_option"
+                            ]
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com\\.microsoft\\.rdc$",
+                                "^com\\.microsoft\\.rdc\\.mac$",
+                                "^com\\.microsoft\\.rdc\\.macos$",
+                                "^com\\.microsoft\\.rdc\\.osx\\.beta$",
+                                "^com\\.thinomenon\\.RemoteDesktopConnection$",
+                                "^com\\.teamviewer\\.TeamViewer$",
+                                "^com\\.vmware\\.horizon$"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "Mac OSX RDP: Option+6 to Alt_GR+9",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "6",
+                        "modifiers": {
+                            "mandatory": [
+                                "option"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "9",
+                            "modifiers": [
+                                "right_option"
+                            ]
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com\\.microsoft\\.rdc$",
+                                "^com\\.microsoft\\.rdc\\.mac$",
+                                "^com\\.microsoft\\.rdc\\.macos$",
+                                "^com\\.microsoft\\.rdc\\.osx\\.beta$",
+                                "^com\\.thinomenon\\.RemoteDesktopConnection$",
+                                "^com\\.teamviewer\\.TeamViewer$",
+                                "^com\\.vmware\\.horizon$"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "Mac OSX RDP: Option+8 to Alt_GR+7",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "8",
+                        "modifiers": {
+                            "mandatory": [
+                                "option"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "7",
+                            "modifiers": [
+                                "right_option"
+                            ]
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com\\.microsoft\\.rdc$",
+                                "^com\\.microsoft\\.rdc\\.mac$",
+                                "^com\\.microsoft\\.rdc\\.macos$",
+                                "^com\\.microsoft\\.rdc\\.osx\\.beta$",
+                                "^com\\.thinomenon\\.RemoteDesktopConnection$",
+                                "^com\\.teamviewer\\.TeamViewer$",
+                                "^com\\.vmware\\.horizon$"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "Mac OSX RDP: Option+9 to Alt_GR+0",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "9",
+                        "modifiers": {
+                            "mandatory": [
+                                "option"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "0",
+                            "modifiers": [
+                                "right_option"
+                            ]
+                        }
+                    ],
+                    "conditions": [
                         {
                             "type": "frontmost_application_if",
                             "bundle_identifiers": [
