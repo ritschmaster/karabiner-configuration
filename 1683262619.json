@@ -182,37 +182,85 @@
                 {
                     "type": "basic",
                     "from": {
+                        "key_code": "left_command",
+                        "modifiers": { "optional": ["any"] }
+                    },
+                    "to": [
+                        {
+                            "set_variable": {
+                                "name": "cmd_tab_mode",
+                                "value": 1
+                            }
+                        },
+                        {
+                            "key_code": "left_option",
+                            "lazy": true
+                        }
+                    ],
+                    "to_after_key_up": [
+                        {
+                            "set_variable": {
+                                "name": "cmd_tab_mode",
+                                "value": 0
+                            }
+                        }
+                    ],
+                    "conditions": [
+                                {
+                                    "type": "frontmost_application_if",
+                                    "bundle_identifiers": [
+                                        "^com\\.microsoft\\.rdc$",
+                                        "^com\\.microsoft\\.rdc\\.mac$",
+                                        "^com\\.microsoft\\.rdc\\.macos$",
+                                        "^com\\.microsoft\\.rdc\\.osx\\.beta$",
+                                        "^com\\.thinomenon\\.RemoteDesktopConnection$",
+                                        "^com\\.teamviewer\\.TeamViewer$",
+                                        "^com\\.vmware\\.horizon$",
+                        "^com\\.citrix\\.receiver\\.icaviewer\\.mac$"
+                                    ]
+                                }
+                            ]
+                },
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "tab",
+                        "modifiers": { "optional": ["any"] }
+                    },
+                    "to": [
+                        {
+                            "key_code": "tab",
+                            "modifiers": ["option"]
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "name": "cmd_tab_mode",
+                            "type": "variable_if",
+                            "value": 1
+                        }
+                    ]
+                },
+                {
+                    "type": "basic",
+                    "from": {
                         "key_code": "tab",
                         "modifiers": {
-                            "mandatory": [
-                                "command"
-                            ],
-                            "optional": [
-                                "shift"
-                            ]
+                            "mandatory": ["shift"],
+                            "optional": ["any"]
                         }
                     },
                     "to": [
                         {
                             "key_code": "tab",
-                            "modifiers": [
-                                "option"
-                            ]
+                            "modifiers": ["option", "shift"]
                         }
                     ],
                     "conditions": [
                         {
-                            "type": "frontmost_application_if",
-                            "bundle_identifiers": [
-                                "^com\\.microsoft\\.rdc$",
-                                "^com\\.microsoft\\.rdc\\.mac$",
-                                "^com\\.microsoft\\.rdc\\.macos$",
-                                "^com\\.microsoft\\.rdc\\.osx\\.beta$",
-                                "^com\\.thinomenon\\.RemoteDesktopConnection$",
-                                "^com\\.teamviewer\\.TeamViewer$",
-                                "^com\\.vmware\\.horizon$",
-				"^com\\.citrix\\.receiver\\.icaviewer\\.mac$"
-                            ]
+                            "name": "cmd_tab_mode",
+                            "type": "variable_if",
+                            "value": 1
                         }
                     ]
                 }
@@ -3680,6 +3728,41 @@
                                 "^com\\.teamviewer\\.TeamViewer$",
                                 "^com\\.vmware\\.horizon$",
 				"^com\\.citrix\\.receiver\\.icaviewer\\.mac$"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "Mac OSX RDP: Cmd to Ctrl",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "left_command",
+                        "modifiers": {
+                            "optional": [
+                                "shift"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "left_control"
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com\\.microsoft\\.rdc$",
+                                "^com\\.microsoft\\.rdc\\.mac$",
+                                "^com\\.microsoft\\.rdc\\.macos$",
+                                "^com\\.microsoft\\.rdc\\.osx\\.beta$",
+                                "^com\\.thinomenon\\.RemoteDesktopConnection$",
+                                "^com\\.teamviewer\\.TeamViewer$",
+                                "^com\\.vmware\\.horizon$"
                             ]
                         }
                     ]
